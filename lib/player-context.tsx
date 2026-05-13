@@ -38,8 +38,12 @@ const PLAYER_DIV_ID = 'yt-hidden-player'
 export function PlayerProvider({ children }: { children: ReactNode }) {
   const ytRef = useRef<any>(null)
   const nextRef = useRef<() => void>(() => {})
+  const autoAdvanceRef = useRef<() => void>(() => {})
   const repeatRef = useRef<'off' | 'all' | 'one'>('off')
   const pendingRef = useRef<Track | null>(null)
+  const currentTrackRef = useRef<Track | null>(null)
+  const queueRef = useRef<Track[]>(tracks)
+  const shuffleRef = useRef<boolean>(false)
   const [ready, setReady] = useState(false)
   const [currentTrack, setCurrentTrack] = useState<Track | null>(tracks[0])
   const [isPlaying, setIsPlaying] = useState(false)
@@ -52,6 +56,9 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const [queue, setQueue] = useState<Track[]>(tracks)
 
   useEffect(() => { repeatRef.current = repeat }, [repeat])
+  useEffect(() => { currentTrackRef.current = currentTrack }, [currentTrack])
+  useEffect(() => { queueRef.current = queue }, [queue])
+  useEffect(() => { shuffleRef.current = shuffle }, [shuffle])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -89,15 +96,11 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
             if (s === YT.PlayerState.PLAYING) setIsPlaying(true)
             else if (s === YT.PlayerState.PAUSED) setIsPlaying(false)
             else if (s === YT.PlayerState.ENDED) {
-              if (repeatRef.current === 'one') {
-                ytRef.current?.seekTo(0, true)
-                ytRef.current?.playVideo()
-              } else {
-                nextRef.current?.()
-              }
+              autoAdvanceRef.current?.()
             }
           },
           onError: () => {
+            // Auto-skip broken tracks
             nextRef.current?.()
           },
         },
@@ -180,6 +183,35 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     play(activeQueue[idx], activeQueue)
   }, [currentTrack, queue, shuffle, play])
   nextRef.current = next
+
+  // Auto-advance after song ends — respects repeat mode (uses refs for fresh state)
+  autoAdvanceRef.current = () => {
+    const r = repeatRef.current
+    const cur = currentTrackRef.current
+    const q = queueRef.current
+    if (!cur) return
+
+    // Repeat one — reload same video from start (more reliable than seekTo after ENDED)
+    if (r === 'one' && cur.youtubeId) {
+      ytRef.current?.loadVideoById({ videoId: cur.youtubeId, startSeconds: 0 })
+      return
+    }
+
+    const activeQueue = q.length > 0 ? q : tracks
+    let idx = activeQueue.findIndex(t => t.id === cur.id)
+    if (idx === -1) idx = 0
+
+    if (shuffleRef.current) {
+      idx = Math.floor(Math.random() * activeQueue.length)
+      play(activeQueue[idx], activeQueue)
+      return
+    }
+
+    const isLast = idx === activeQueue.length - 1
+    if (isLast && r === 'off') return // Stop at end of queue
+    const nextIdx = isLast ? 0 : idx + 1
+    play(activeQueue[nextIdx], activeQueue)
+  }
 
   const prev = useCallback(() => {
     if (!currentTrack) return
