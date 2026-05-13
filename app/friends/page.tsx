@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { AppShell } from '@/components/AppShell'
 import { TopBar } from '@/components/TopBar'
 import { friends } from '@/lib/friends-data'
 import { ChevronLeftIcon, SearchIcon } from '@/lib/icons'
@@ -18,8 +17,7 @@ export default function FriendsPage() {
   })
 
   return (
-    <AppShell>
-      <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-gradient-to-b from-[#3a0ca3] via-[#1f1f1f] to-[#121212]">
+    <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-gradient-to-b from-[#3a0ca3] via-[#1f1f1f] to-[#121212]">
         <TopBar />
         <div className="px-8 py-6 shrink-0">
           <Link href="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium mb-4">
@@ -58,7 +56,6 @@ export default function FriendsPage() {
           )}
         </div>
       </main>
-    </AppShell>
   )
 }
 

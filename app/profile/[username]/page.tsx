@@ -3,7 +3,6 @@
 import { use } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { AppShell } from '@/components/AppShell'
 import { TopBar } from '@/components/TopBar'
 import { friends, friendProfiles } from '@/lib/friends-data'
 import { getTrackById, getPlaylistById, getPlaylistTracks } from '@/lib/data'
@@ -18,21 +17,19 @@ export default function FriendProfilePage({ params }: { params: Promise<{ userna
   if (!profile) notFound()
 
   return (
-    <AppShell>
-      <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
-        <TopBar />
-        <div className="overflow-y-auto custom-scrollbar flex-1">
-          <Hero friend={friend} profile={profile} />
-          <div className="bg-gradient-to-b from-black/40 to-[#121212] px-8 py-6">
-            <ActionBar friend={friend} />
-            <NowPlayingBanner friend={friend} />
-            <TopArtists profile={profile} />
-            <PublicPlaylists profile={profile} />
-            <RecentTracks profile={profile} />
-          </div>
+    <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
+      <TopBar />
+      <div className="overflow-y-auto custom-scrollbar flex-1">
+        <Hero friend={friend} profile={profile} />
+        <div className="bg-gradient-to-b from-black/40 to-[#121212] px-8 py-6">
+          <ActionBar friend={friend} />
+          <NowPlayingBanner friend={friend} />
+          <TopArtists profile={profile} />
+          <PublicPlaylists profile={profile} />
+          <RecentTracks profile={profile} />
         </div>
-      </main>
-    </AppShell>
+      </div>
+    </main>
   )
 }
 

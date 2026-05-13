@@ -37,7 +37,7 @@ export function FriendsSidebar() {
   const offline = friends.filter(f => !f.isOnline)
 
   return (
-    <aside className="w-[320px] shrink-0 bg-[#121212] rounded-lg m-2 ml-0 flex flex-col overflow-hidden">
+    <aside className="fixed lg:relative lg:m-2 lg:ml-0 inset-y-0 right-0 z-30 lg:z-auto w-[85vw] max-w-[320px] lg:w-[280px] xl:w-[320px] shrink-0 bg-[#121212] lg:rounded-lg flex flex-col overflow-hidden shadow-2xl lg:shadow-none">
       <div className="flex items-center justify-between px-4 py-4 shrink-0">
         <h2 className="text-white font-bold text-base">Friend Activity</h2>
         <button

@@ -44,6 +44,10 @@ export const tracks: Track[] = [
   { id: 't10', title: 'Last Night', artist: 'Morgan Wallen', album: 'One Thing at a Time', duration: '2:43', durationSec: 163, cover: gradient('#bc6c25', '#dda15e'), youtubeId: 'Ed0wuhrK5tk' },
   { id: 't11', title: 'Paint The Town Red', artist: 'Doja Cat', album: 'Scarlet', duration: '3:50', durationSec: 230, cover: gradient('#d00000', '#9d0208'), youtubeId: 'm4_9TFeMfJE' },
   { id: 't12', title: 'Greedy', artist: 'Tate McRae', album: 'Think Later', duration: '2:11', durationSec: 131, cover: gradient('#ee9b00', '#ca6702'), youtubeId: 'ItHwgWdgi5Y' },
+  { id: 't13', title: 'Stronger', artist: 'Kanye West', album: 'Graduation', duration: '5:11', durationSec: 311, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'PsO6ZnUZI0g' },
+  { id: 't14', title: 'Flashing Lights', artist: 'Kanye West', album: 'Graduation', duration: '3:57', durationSec: 237, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'ila-hAUXR5U' },
+  { id: 't15', title: 'Good Life', artist: 'Kanye West', album: 'Graduation', duration: '3:27', durationSec: 207, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: '2C-BLqx-S0I' },
+  { id: 't16', title: 'Homecoming', artist: 'Kanye West', album: 'Graduation', duration: '3:23', durationSec: 203, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'X0CmS1H4y2A' },
 ]
 
 export const playlists: Playlist[] = [
@@ -55,6 +59,7 @@ export const playlists: Playlist[] = [
   { id: 'p6', name: 'Indie Discoveries', description: 'Hidden gems', cover: gradient('#06d6a0', '#073b4c'), owner: 'Spotify', trackCount: 5, trackIds: ['t2', 't8', 't9', 't3', 't4'] },
   { id: 'p7', name: 'Focus Flow', description: 'Deep concentration music', cover: gradient('#118ab2', '#073b4c'), owner: 'Spotify', trackCount: 5, trackIds: ['t3', 't5', 't2', 't9', 't8'] },
   { id: 'p8', name: 'Throwback Thursday', description: '2000s nostalgia', cover: gradient('#f72585', '#7209b7'), owner: 'Spotify', trackCount: 5, trackIds: ['t7', 't10', 't4', 't1', 't11'] },
+  { id: 'p9', name: 'Graduation', description: 'Kanye West · 2007 · The drop-tops, the bear, the auto-tune awakening', cover: gradient('#ec5f8e', '#1c8feb'), owner: 'Kanye West', trackCount: 4, trackIds: ['t13', 't14', 't15', 't16'] },
 ]
 
 export const recentlyPlayed: Album[] = [
@@ -64,6 +69,7 @@ export const recentlyPlayed: Album[] = [
   { id: 'a4', title: 'SOS', artist: 'SZA', cover: gradient('#06ffa5', '#118ab2'), year: 2022, playlistId: 'p3' },
   { id: 'a5', title: 'GUTS', artist: 'Olivia Rodrigo', cover: gradient('#240046', '#10002b'), year: 2023, playlistId: 'p7' },
   { id: 'a6', title: 'Renaissance', artist: 'Beyoncé', cover: gradient('#c0c0c0', '#808080'), year: 2022, playlistId: 'p2' },
+  { id: 'a7', title: 'Graduation', artist: 'Kanye West', cover: gradient('#ec5f8e', '#1c8feb'), year: 2007, playlistId: 'p9' },
 ]
 
 export const getTrackById = (id: string): Track | undefined =>

@@ -3,7 +3,6 @@
 import { use, useEffect, useRef, useState, FormEvent } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { AppShell } from '@/components/AppShell'
 import { TopBar } from '@/components/TopBar'
 import { friends } from '@/lib/friends-data'
 import { loadMessages, saveMessages, formatFullTime, type Message } from '@/lib/messages'
@@ -67,8 +66,7 @@ export default function ChatPage({ params }: { params: Promise<{ username: strin
   }
 
   return (
-    <AppShell>
-      <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
+    <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
         <TopBar />
 
         {/* Chat header */}
@@ -146,7 +144,6 @@ export default function ChatPage({ params }: { params: Promise<{ username: strin
             </button>
           </div>
         </form>
-      </main>
-    </AppShell>
+    </main>
   )
 }

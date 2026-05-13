@@ -29,14 +29,14 @@ export function Player() {
   const volLevel = volume === 0 ? 0 : volume < 0.5 ? 1 : 2
 
   return (
-    <div className="h-[90px] bg-black px-4 flex items-center justify-between shrink-0">
+    <div className="h-[90px] bg-black px-2 sm:px-4 flex items-center justify-between shrink-0 gap-2">
       {/* Left — track info */}
-      <div className="flex items-center gap-3 w-[30%] min-w-0">
+      <div className="flex items-center gap-3 w-[40%] sm:w-[30%] min-w-0">
         <Artwork
           title={currentTrack.title}
           artist={currentTrack.artist}
           fallback={currentTrack.cover}
-          className="w-14 h-14"
+          className="w-12 h-12 sm:w-14 sm:h-14"
         />
         <div className="min-w-0">
           <div className="text-white text-sm font-normal truncate hover:underline cursor-pointer">
@@ -46,7 +46,7 @@ export function Player() {
             {currentTrack.artist}
           </div>
         </div>
-        <div className="flex items-center gap-2 ml-3">
+        <div className="hidden sm:flex items-center gap-2 ml-3">
           <button className="text-[#b3b3b3] hover:text-white transition-colors" title="Add to playlist">
             <PlusIcon size={16} />
           </button>
@@ -61,7 +61,7 @@ export function Player() {
       </div>
 
       {/* Center — controls */}
-      <div className="flex flex-col items-center gap-1 max-w-[722px] w-[40%]">
+      <div className="flex flex-col items-center gap-1 max-w-[722px] w-[50%] sm:w-[40%]">
         <div className="flex items-center gap-4">
           <button
             onClick={toggleShuffle}
@@ -107,9 +107,9 @@ export function Player() {
         </div>
       </div>
 
-      {/* Right — extras */}
-      <div className="flex items-center gap-2 w-[30%] justify-end">
-        <button className="text-[#b3b3b3] hover:text-white transition-colors" title="Now playing view">
+      {/* Right — extras (hidden on small) */}
+      <div className="hidden sm:flex items-center gap-2 w-[30%] justify-end">
+        <button className="text-[#b3b3b3] hover:text-white transition-colors hidden lg:block" title="Now playing view">
           <MicIcon size={16} />
         </button>
         <button className="text-[#b3b3b3] hover:text-white transition-colors" title="Queue">
@@ -121,7 +121,7 @@ export function Player() {
           </button>
           <VolumeSlider volume={volume} setVolume={setVolume} />
         </div>
-        <button className="text-[#b3b3b3] hover:text-white transition-colors" title="Open full screen">
+        <button className="text-[#b3b3b3] hover:text-white transition-colors hidden md:block" title="Open full screen">
           <MaximizeIcon size={16} />
         </button>
       </div>

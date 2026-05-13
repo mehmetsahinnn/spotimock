@@ -1,43 +1,57 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { AppShell } from '@/components/AppShell'
 import { TopBar } from '@/components/TopBar'
-import { profile } from '@/lib/friends-data'
+import { profile, friends } from '@/lib/friends-data'
 import { ChevronLeftIcon, PlayIcon } from '@/lib/icons'
+import { useUI } from '@/lib/ui-context'
+
+const EDIT_KEY = 'spotify-mock-profile-edit-v1'
+
+function useProfileWithEdits() {
+  const [edited, setEdited] = useState({ name: profile.name, username: profile.username, bio: profile.bio })
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const raw = window.localStorage.getItem(EDIT_KEY)
+    if (raw) {
+      try { setEdited(JSON.parse(raw)) } catch {}
+    }
+  }, [])
+  return { ...profile, ...edited }
+}
 
 export default function ProfilePage() {
   return (
-    <AppShell>
-      <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
-        <TopBar />
-        <div className="overflow-y-auto custom-scrollbar flex-1">
-          <ProfileHero />
-          <div className="bg-gradient-to-b from-[#1f1f1f]/40 to-[#121212] px-8 py-6">
-            <PlayCircle />
-            <TopArtistsThisMonth />
-            <PublicPlaylistsSection />
-            <RecentArtistsSection />
-            <SimilarGenreSection />
-            <FollowersSection />
-          </div>
+    <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
+      <TopBar />
+      <div className="overflow-y-auto custom-scrollbar flex-1">
+        <ProfileHero />
+        <div className="bg-gradient-to-b from-[#1f1f1f]/40 to-[#121212] px-8 py-6">
+          <PlayCircle />
+          <TopArtistsThisMonth />
+          <PublicPlaylistsSection />
+          <RecentArtistsSection />
+          <SimilarGenreSection />
+          <FollowersSection />
         </div>
-      </main>
-    </AppShell>
+      </div>
+    </main>
   )
 }
 
 function ProfileHero() {
+  const profile = useProfileWithEdits()
   return (
-    <div className="shrink-0 px-8 pt-2 pb-8 bg-gradient-to-b from-[#7c3aed] via-[#7c3aed]/40 to-transparent">
+    <div className="shrink-0 px-4 sm:px-8 pt-2 pb-8 bg-gradient-to-b from-[#7c3aed] via-[#7c3aed]/40 to-transparent">
       <Link href="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium mb-6">
         <ChevronLeftIcon size={20} /> Back to Home
       </Link>
-      <div className="flex items-end gap-6">
-        <div className="w-44 h-44 rounded-full shadow-2xl shrink-0" style={{ background: profile.avatar }} />
+      <div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6">
+        <div className="w-32 h-32 sm:w-44 sm:h-44 rounded-full shadow-2xl shrink-0" style={{ background: profile.avatar }} />
         <div className="flex flex-col gap-3 pb-2">
           <div className="text-xs font-bold text-white uppercase tracking-widest">Profile</div>
-          <h1 className="text-white text-[5rem] font-black leading-none">{profile.name}</h1>
+          <h1 className="text-white text-4xl sm:text-6xl lg:text-[5rem] font-black leading-none">{profile.name}</h1>
           <div className="text-white/90 text-sm">{profile.bio}</div>
           <div className="flex items-center gap-1 text-white text-sm flex-wrap">
             <span className="font-bold">@{profile.username}</span>
@@ -57,9 +71,13 @@ function ProfileHero() {
 }
 
 function PlayCircle() {
+  const { openEditProfile } = useUI()
   return (
     <div className="flex items-center gap-3 mb-8">
-      <button className="px-6 py-2 bg-white hover:scale-105 text-black text-sm font-bold rounded-full transition-transform">
+      <button
+        onClick={openEditProfile}
+        className="px-6 py-2 bg-white hover:scale-105 text-black text-sm font-bold rounded-full transition-transform"
+      >
         Edit profile
       </button>
       <button className="text-[#b3b3b3] hover:text-white text-2xl">⋯</button>
@@ -131,19 +149,25 @@ function SimilarGenreSection() {
 }
 
 function FollowersSection() {
+  const followers = friends.slice(0, 6)
   return (
     <Section title="Followers" href="/profile/followers" subtitle={`${profile.followers} people follow you`}>
       <Grid>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <CardCircle
-            key={i}
-            title={`Friend ${i + 1}`}
-            subtitle="Follows you"
-            cover={`linear-gradient(135deg, hsl(${i * 60}, 70%, 50%) 0%, hsl(${i * 60 + 30}, 50%, 30%) 100%)`}
-          />
+        {followers.map(f => (
+          <FollowerCard key={f.id} username={f.username} name={f.name} avatar={f.avatar} />
         ))}
       </Grid>
     </Section>
+  )
+}
+
+function FollowerCard({ username, name, avatar }: { username: string; name: string; avatar: string }) {
+  return (
+    <Link href={`/profile/${username}`} className="group bg-[#181818] hover:bg-[#282828] p-4 rounded-md transition-colors text-center block">
+      <div className="w-full aspect-square rounded-full shadow-lg mb-3" style={{ background: avatar }} />
+      <div className="text-white font-bold text-sm truncate">{name}</div>
+      <div className="text-[#b3b3b3] text-xs truncate">@{username}</div>
+    </Link>
   )
 }
 
@@ -155,7 +179,11 @@ function Section({ title, subtitle, href, children }: { title: string; subtitle?
           <h2 className="text-white text-2xl font-bold hover:underline cursor-pointer">{title}</h2>
           {subtitle && <div className="text-[#b3b3b3] text-sm mt-1">{subtitle}</div>}
         </div>
-        {href && <button className="text-[#b3b3b3] text-sm font-bold hover:underline">See all</button>}
+        {href && (
+          <Link href={href} className="text-[#b3b3b3] text-sm font-bold hover:underline shrink-0 ml-2">
+            See all
+          </Link>
+        )}
       </div>
       <div className="mt-4">{children}</div>
     </section>

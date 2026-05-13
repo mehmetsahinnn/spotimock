@@ -17,35 +17,54 @@ const FriendsActivityIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 )
 
+const HamburgerIcon = ({ size = 22 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="18" x2="21" y2="18" />
+  </svg>
+)
+
 export function TopBar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const { friendsOpen, toggleFriends } = useUI()
+  const {
+    friendsOpen, toggleFriends,
+    toggleSidebar,
+    openEditProfile, openSettings, openAccount, openEasterEgg,
+  } = useUI()
   const router = useRouter()
 
   return (
-    <div className="flex items-center justify-between px-6 py-3 shrink-0 relative">
+    <div className="flex items-center justify-between px-3 sm:px-6 py-3 shrink-0 relative gap-2">
       <div className="flex items-center gap-2">
         <button
+          onClick={toggleSidebar}
+          className="md:hidden w-9 h-9 rounded-full bg-black/70 flex items-center justify-center text-white hover:scale-105 transition-transform"
+          title="Menu"
+        >
+          <HamburgerIcon size={20} />
+        </button>
+        <button
           onClick={() => router.back()}
-          className="w-8 h-8 rounded-full bg-black/70 flex items-center justify-center text-white hover:scale-105 transition-transform"
+          className="hidden sm:flex w-8 h-8 rounded-full bg-black/70 items-center justify-center text-white hover:scale-105 transition-transform"
           title="Back"
         >
           <ChevronLeftIcon size={22} />
         </button>
         <button
           onClick={() => router.forward()}
-          className="w-8 h-8 rounded-full bg-black/70 flex items-center justify-center text-white hover:scale-105 transition-transform"
+          className="hidden sm:flex w-8 h-8 rounded-full bg-black/70 items-center justify-center text-white hover:scale-105 transition-transform"
           title="Forward"
         >
           <ChevronRightIcon size={22} />
         </button>
       </div>
 
-      <div className="flex items-center gap-3">
-        <button className="px-4 py-2 rounded-full bg-white text-black text-sm font-bold hover:scale-105 transition-transform">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <button className="hidden md:block px-4 py-2 rounded-full bg-white text-black text-sm font-bold hover:scale-105 transition-transform">
           Explore Premium
         </button>
-        <button className="px-4 py-2 rounded-full bg-black text-white text-sm font-bold hover:scale-105 transition-transform flex items-center gap-2">
+        <button className="hidden lg:flex px-4 py-2 rounded-full bg-black text-white text-sm font-bold hover:scale-105 transition-transform items-center gap-2">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 3a9 9 0 1 0 9 9h-2a7 7 0 1 1-7-7V3z" />
             <path d="M12 7v5l3 2" stroke="currentColor" strokeWidth="2" fill="none" />
@@ -53,7 +72,6 @@ export function TopBar() {
           Install App
         </button>
 
-        {/* Friend Activity toggle */}
         <button
           onClick={toggleFriends}
           className={`w-8 h-8 rounded-full flex items-center justify-center transition-all relative ${friendsOpen ? 'bg-[#1ed760] text-black' : 'bg-black text-white hover:scale-105'}`}
@@ -63,10 +81,8 @@ export function TopBar() {
           <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#1ed760] border-2 border-black rounded-full" />
         </button>
 
-        {/* Upcoming Events popup */}
         <UpcomingEventsButton />
 
-        {/* Profile dropdown */}
         <div className="relative">
           <button
             onClick={() => setMenuOpen(m => !m)}
@@ -86,14 +102,29 @@ export function TopBar() {
                 >
                   Profile
                 </Link>
-                <button className="w-full text-left px-3 py-2.5 text-sm text-white hover:bg-[#3e3e3e] transition-colors">
+                <button
+                  onClick={() => { setMenuOpen(false); openEditProfile() }}
+                  className="w-full text-left px-3 py-2.5 text-sm text-white hover:bg-[#3e3e3e] transition-colors"
+                >
+                  Edit profile
+                </button>
+                <button
+                  onClick={() => { setMenuOpen(false); openAccount() }}
+                  className="w-full text-left px-3 py-2.5 text-sm text-white hover:bg-[#3e3e3e] transition-colors"
+                >
                   Account
                 </button>
-                <button className="w-full text-left px-3 py-2.5 text-sm text-white hover:bg-[#3e3e3e] transition-colors">
+                <button
+                  onClick={() => { setMenuOpen(false); openSettings() }}
+                  className="w-full text-left px-3 py-2.5 text-sm text-white hover:bg-[#3e3e3e] transition-colors"
+                >
                   Settings
                 </button>
                 <div className="border-t border-[#3e3e3e] my-1" />
-                <button className="w-full text-left px-3 py-2.5 text-sm text-white hover:bg-[#3e3e3e] transition-colors">
+                <button
+                  onClick={() => { setMenuOpen(false); openEasterEgg() }}
+                  className="w-full text-left px-3 py-2.5 text-sm text-white hover:bg-[#3e3e3e] transition-colors"
+                >
                   Log out
                 </button>
               </div>

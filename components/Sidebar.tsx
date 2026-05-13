@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { HomeIcon, SearchIcon, LibraryIcon, PlusIcon } from '@/lib/icons'
 import { playlists } from '@/lib/data'
+import { useUI } from '@/lib/ui-context'
 
 const UsersIcon = ({ size = 24 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -30,6 +31,7 @@ export function Sidebar() {
   const isSearch = pathname.startsWith('/search')
   const isFriends = pathname === '/friends'
   const isMessages = pathname.startsWith('/messages')
+  const { closeSidebar } = useUI()
 
   const [filter, setFilter] = useState<Filter>('all')
   const [sort, setSort] = useState<Sort>('recents')
@@ -59,10 +61,19 @@ export function Sidebar() {
   const sortLabel = sort === 'recents' ? 'Recents' : sort === 'alpha' ? 'Alphabetical' : 'Creator'
 
   return (
-    <aside className="w-[340px] flex flex-col gap-2 p-2 shrink-0">
-      <div className="bg-[#121212] rounded-lg p-2">
+    <aside className="h-full w-[80vw] max-w-[340px] md:w-[260px] lg:w-[340px] flex flex-col gap-2 p-2 shrink-0 bg-black">
+      <div className="bg-[#121212] rounded-lg p-2 relative">
+        {/* Mobile close button */}
+        <button
+          onClick={closeSidebar}
+          className="md:hidden absolute right-2 top-2 w-8 h-8 rounded-full text-[#b3b3b3] hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors"
+          aria-label="Close menu"
+        >
+          ×
+        </button>
         <Link
           href="/"
+          onClick={closeSidebar}
           className={`flex items-center gap-5 w-full px-5 py-3 rounded-md transition-colors ${isHome ? 'text-white' : 'text-[#b3b3b3] hover:text-white'}`}
         >
           <HomeIcon size={24} filled={isHome} />
@@ -70,6 +81,7 @@ export function Sidebar() {
         </Link>
         <Link
           href="/search"
+          onClick={closeSidebar}
           className={`flex items-center gap-5 w-full px-5 py-3 rounded-md transition-colors ${isSearch ? 'text-white' : 'text-[#b3b3b3] hover:text-white'}`}
         >
           <SearchIcon size={24} />
@@ -77,6 +89,7 @@ export function Sidebar() {
         </Link>
         <Link
           href="/friends"
+          onClick={closeSidebar}
           className={`flex items-center gap-5 w-full px-5 py-3 rounded-md transition-colors ${isFriends ? 'text-white' : 'text-[#b3b3b3] hover:text-white'}`}
         >
           <UsersIcon size={24} />
@@ -84,6 +97,7 @@ export function Sidebar() {
         </Link>
         <Link
           href="/messages"
+          onClick={closeSidebar}
           className={`flex items-center gap-5 w-full px-5 py-3 rounded-md transition-colors ${isMessages ? 'text-white' : 'text-[#b3b3b3] hover:text-white'}`}
         >
           <MessageIcon size={24} />

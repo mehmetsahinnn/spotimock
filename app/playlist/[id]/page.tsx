@@ -2,7 +2,6 @@
 
 import { use } from 'react'
 import { notFound } from 'next/navigation'
-import { AppShell } from '@/components/AppShell'
 import { TopBar } from '@/components/TopBar'
 import { getPlaylistById, getPlaylistTracks } from '@/lib/data'
 import { usePlayer } from '@/lib/player-context'
@@ -17,18 +16,16 @@ export default function PlaylistPage({ params }: { params: Promise<{ id: string 
   const tracks = getPlaylistTracks(id)
 
   return (
-    <AppShell>
-      <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
-        <TopBar />
-        <div className="overflow-y-auto custom-scrollbar flex-1">
-          <PlaylistHero playlist={playlist} trackCount={tracks.length} />
-          <div className="bg-gradient-to-b from-black/40 to-[#121212] px-8 pt-6 pb-8">
-            <PlayControls firstTrack={tracks[0]} allTracks={tracks} />
-            <TrackTable tracks={tracks} allTracks={tracks} />
-          </div>
+    <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-[#121212]">
+      <TopBar />
+      <div className="overflow-y-auto custom-scrollbar flex-1">
+        <PlaylistHero playlist={playlist} trackCount={tracks.length} />
+        <div className="bg-gradient-to-b from-black/40 to-[#121212] px-8 pt-6 pb-8">
+          <PlayControls firstTrack={tracks[0]} allTracks={tracks} />
+          <TrackTable tracks={tracks} allTracks={tracks} />
         </div>
-      </main>
-    </AppShell>
+      </div>
+    </main>
   )
 }
 

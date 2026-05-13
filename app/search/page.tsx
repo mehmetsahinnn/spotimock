@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { AppShell } from '@/components/AppShell'
 import { TopBar } from '@/components/TopBar'
 import { Artwork } from '@/components/Artwork'
 import { tracks, playlists } from '@/lib/data'
@@ -10,25 +9,31 @@ import { friends } from '@/lib/friends-data'
 import { usePlayer } from '@/lib/player-context'
 import { SearchIcon, PlayIcon, PauseIcon } from '@/lib/icons'
 
-const browseCategories = [
-  { label: 'Pop', bg: 'linear-gradient(135deg,#ff6b9d,#c44569)' },
-  { label: 'Hip-Hop', bg: 'linear-gradient(135deg,#7209b7,#3a0ca3)' },
-  { label: 'Rock', bg: 'linear-gradient(135deg,#d00000,#9d0208)' },
-  { label: 'Chill', bg: 'linear-gradient(135deg,#06d6a0,#118ab2)' },
-  { label: 'Workout', bg: 'linear-gradient(135deg,#ff006e,#fb5607)' },
-  { label: 'Indie', bg: 'linear-gradient(135deg,#240046,#5a189a)' },
-  { label: 'Latin', bg: 'linear-gradient(135deg,#ffba08,#f48c06)' },
-  { label: 'R&B', bg: 'linear-gradient(135deg,#03045e,#0077b6)' },
+const browseCategories: { label: string; bg: string; img: string }[] = [
+  { label: "Today's Top Hits", bg: 'linear-gradient(135deg,#1db954,#191414)', img: 'https://picsum.photos/seed/tophits/400/400' },
+  { label: 'RapCaviar', bg: 'linear-gradient(135deg,#7209b7,#3a0ca3)', img: 'https://picsum.photos/seed/rapcaviar/400/400' },
+  { label: 'Rock Classics', bg: 'linear-gradient(135deg,#d00000,#9d0208)', img: 'https://picsum.photos/seed/rockclassics/400/400' },
+  { label: 'Mood Booster', bg: 'linear-gradient(135deg,#ff6b9d,#c44569)', img: 'https://picsum.photos/seed/moodbooster/400/400' },
+  { label: 'Peaceful Piano', bg: 'linear-gradient(135deg,#06d6a0,#118ab2)', img: 'https://picsum.photos/seed/piano/400/400' },
+  { label: 'New Music Friday', bg: 'linear-gradient(135deg,#ff006e,#fb5607)', img: 'https://picsum.photos/seed/newfri/400/400' },
+  { label: 'Hot Country', bg: 'linear-gradient(135deg,#bc6c25,#dda15e)', img: 'https://picsum.photos/seed/country/400/400' },
+  { label: 'All Out 2010s', bg: 'linear-gradient(135deg,#f72585,#7209b7)', img: 'https://picsum.photos/seed/2010s/400/400' },
+  { label: 'Viva Latino', bg: 'linear-gradient(135deg,#ffba08,#f48c06)', img: 'https://picsum.photos/seed/latino/400/400' },
+  { label: 'Are & Be', bg: 'linear-gradient(135deg,#03045e,#0077b6)', img: 'https://picsum.photos/seed/randb/400/400' },
+  { label: 'mint', bg: 'linear-gradient(135deg,#06d6a0,#073b4c)', img: 'https://picsum.photos/seed/mint/400/400' },
+  { label: 'Pollen', bg: 'linear-gradient(135deg,#ff9f1c,#ffbf69)', img: 'https://picsum.photos/seed/pollen/400/400' },
+  { label: 'Sad Bops', bg: 'linear-gradient(135deg,#240046,#5a189a)', img: 'https://picsum.photos/seed/sadbops/400/400' },
+  { label: 'Beast Mode', bg: 'linear-gradient(135deg,#000000,#660000)', img: 'https://picsum.photos/seed/beast/400/400' },
+  { label: 'Tear Drop', bg: 'linear-gradient(135deg,#118ab2,#073b4c)', img: 'https://picsum.photos/seed/tear/400/400' },
+  { label: 'Chill Hits', bg: 'linear-gradient(135deg,#9d4edd,#5a189a)', img: 'https://picsum.photos/seed/chillhits/400/400' },
 ]
 
 export default function SearchPage() {
   return (
-    <AppShell>
-      <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-gradient-to-b from-[#1f1f1f] to-[#121212]">
-        <TopBar />
-        <SearchBody />
-      </main>
-    </AppShell>
+    <main className="flex-1 flex flex-col rounded-lg overflow-hidden m-2 mx-0 bg-gradient-to-b from-[#1f1f1f] to-[#121212]">
+      <TopBar />
+      <SearchBody />
+    </main>
   )
 }
 
@@ -80,14 +85,22 @@ function SearchBody() {
         {!query && (
           <>
             <h2 className="text-white text-2xl font-bold mb-4">Browse all</h2>
-            <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {browseCategories.map(c => (
                 <div
                   key={c.label}
-                  className="aspect-square rounded-lg p-4 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform"
+                  className="aspect-square rounded-lg relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform shadow-lg"
                   style={{ background: c.bg }}
                 >
-                  <div className="text-white font-bold text-xl">{c.label}</div>
+                  <div className="absolute inset-0 p-3 sm:p-4 z-10">
+                    <div className="text-white font-bold text-base sm:text-xl drop-shadow-lg">{c.label}</div>
+                  </div>
+                  <img
+                    src={c.img}
+                    alt=""
+                    className="absolute -bottom-2 -right-2 w-[60%] aspect-square object-cover rotate-[20deg] shadow-2xl rounded"
+                    loading="lazy"
+                  />
                 </div>
               ))}
             </div>

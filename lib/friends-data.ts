@@ -75,7 +75,7 @@ export type RecentArtist = {
 
 export const profile = {
   name: 'Mehmet',
-  username: 'mehmet.tc',
+  username: 'mehs',
   bio: 'Music lover · Coffee addict · İstanbul',
   avatar: grad('#9333ea', '#ec4899'),
   followers: 47,
