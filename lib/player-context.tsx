@@ -45,6 +45,9 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const currentTrackRef = useRef<Track | null>(null)
   const queueRef = useRef<Track[]>(tracks)
   const shuffleRef = useRef<boolean>(false)
+  // Error guard — prevent infinite reload loop on broken video
+  const erroredIdsRef = useRef<Set<string>>(new Set())
+  const lastErrorTrackIdRef = useRef<string | null>(null)
   const [ready, setReady] = useState(false)
   const [currentTrack, setCurrentTrack] = useState<Track | null>(tracks[0])
   const [isPlaying, setIsPlaying] = useState(false)
@@ -105,9 +108,15 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
             }
           },
           onError: () => {
-            // Flag error, don't auto-skip — let user click YouTube fallback or next
+            // Mark this track as broken, stop playback to prevent infinite reload loop
+            const curId = currentTrackRef.current?.id
+            if (curId) {
+              erroredIdsRef.current.add(curId)
+              lastErrorTrackIdRef.current = curId
+            }
             setLoadError(true)
             setIsPlaying(false)
+            try { ytRef.current?.stopVideo?.() } catch {}
           },
         },
       })
@@ -154,7 +163,12 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     setLoadError(false)
     const p = ytRef.current
     if (ready && p?.loadVideoById && track.youtubeId) {
-      p.loadVideoById(track.youtubeId)
+      try {
+        p.loadVideoById(track.youtubeId)
+      } catch (e) {
+        console.warn('[player] loadVideoById failed:', e)
+        setLoadError(true)
+      }
     } else {
       pendingRef.current = track
     }
@@ -199,7 +213,8 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     if (!cur) return
 
     // Repeat one — reload same video from start (more reliable than seekTo after ENDED)
-    if (r === 'one' && cur.youtubeId) {
+    // GUARD: don't loop on a broken track — would infinite-error
+    if (r === 'one' && cur.youtubeId && !erroredIdsRef.current.has(cur.id)) {
       ytRef.current?.loadVideoById({ videoId: cur.youtubeId, startSeconds: 0 })
       return
     }
@@ -209,15 +224,28 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     if (idx === -1) idx = 0
 
     if (shuffleRef.current) {
-      idx = Math.floor(Math.random() * activeQueue.length)
-      play(activeQueue[idx], activeQueue)
+      // Pick a non-errored track
+      const candidates = activeQueue.filter(t => !erroredIdsRef.current.has(t.id))
+      if (candidates.length === 0) return
+      const pick = candidates[Math.floor(Math.random() * candidates.length)]
+      play(pick, activeQueue)
       return
     }
 
     const isLast = idx === activeQueue.length - 1
     if (isLast && r === 'off') return // Stop at end of queue
-    const nextIdx = isLast ? 0 : idx + 1
-    play(activeQueue[nextIdx], activeQueue)
+    // Advance to next non-errored track within reasonable bounds
+    let cursor = idx
+    for (let i = 0; i < activeQueue.length; i++) {
+      const candIdx = (cursor + 1) % activeQueue.length
+      if (candIdx === idx) return // wrapped around, nothing playable
+      cursor = candIdx
+      const cand = activeQueue[candIdx]
+      if (!erroredIdsRef.current.has(cand.id)) {
+        play(cand, activeQueue)
+        return
+      }
+    }
   }
 
   const prev = useCallback(() => {

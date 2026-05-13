@@ -53,7 +53,7 @@ export const tracks: Track[] = [
   { id: 't19', title: 'Can\'t Tell Me Nothing', artist: 'Kanye West', album: 'Graduation', duration: '4:32', durationSec: 272, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'E58qLXBfLrs' },
   // Daft Punk — Random Access Memories (2013) — use lyric/audio uploads (official MVs often blocked from embed)
   { id: 't20', title: 'Get Lucky', artist: 'Daft Punk, Pharrell Williams, Nile Rodgers', album: 'Random Access Memories', duration: '6:08', durationSec: 368, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'h6dEDp_GZuk' },
-  { id: 't21', title: 'Instant Crush', artist: 'Daft Punk, Julian Casablancas', album: 'Random Access Memories', duration: '5:37', durationSec: 337, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'JFKQB0-Rfm0' },
+  { id: 't21', title: 'Instant Crush', artist: 'Daft Punk, Julian Casablancas', album: 'Random Access Memories', duration: '5:37', durationSec: 337, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'BPbb40rXfx0' },
   { id: 't22', title: 'Lose Yourself to Dance', artist: 'Daft Punk, Pharrell Williams', album: 'Random Access Memories', duration: '5:53', durationSec: 353, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'tjbWHpZmShQ' },
   { id: 't23', title: 'Doin\' It Right', artist: 'Daft Punk, Panda Bear', album: 'Random Access Memories', duration: '4:11', durationSec: 251, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'bf7TS_-ucBs' },
   { id: 't24', title: 'Giorgio by Moroder', artist: 'Daft Punk, Giorgio Moroder', album: 'Random Access Memories', duration: '9:04', durationSec: 544, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'zhl-Cs1-sG4' },
