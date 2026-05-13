@@ -57,6 +57,30 @@ export function MainContent() {
           })}
         </div>
 
+        {/* Featured / Newly added */}
+        <Section title="Featured this week" href="/search">
+          <Grid>
+            {['p13', 'p9', 'p10', 'p11', 'p12'].map(pid => {
+              const p = playlists.find(x => x.id === pid)
+              if (!p) return null
+              return (
+                <Card
+                  key={p.id}
+                  href={`/playlist/${p.id}`}
+                  title={p.name}
+                  artist={p.owner}
+                  fallback={p.cover}
+                  subtitle={p.description}
+                  onPlay={() => {
+                    const pt = getPlaylistTracks(p.id)
+                    if (pt[0]) play(pt[0], pt)
+                  }}
+                />
+              )
+            })}
+          </Grid>
+        </Section>
+
         {/* Recently played */}
         <Section title="Recently played" href="/search">
           <Grid>
