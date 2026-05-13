@@ -14,6 +14,7 @@ type PlayerState = {
   repeat: 'off' | 'all' | 'one'
   queue: Track[]
   ready: boolean
+  loadError: boolean
   play: (track: Track, queueList?: Track[]) => void
   togglePlay: () => void
   next: () => void
@@ -54,6 +55,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const [shuffle, setShuffle] = useState(false)
   const [repeat, setRepeat] = useState<'off' | 'all' | 'one'>('off')
   const [queue, setQueue] = useState<Track[]>(tracks)
+  const [loadError, setLoadError] = useState(false)
 
   useEffect(() => { repeatRef.current = repeat }, [repeat])
   useEffect(() => { currentTrackRef.current = currentTrack }, [currentTrack])
@@ -93,15 +95,19 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
             const YT = window.YT
             if (!YT) return
             const s = e.data
-            if (s === YT.PlayerState.PLAYING) setIsPlaying(true)
+            if (s === YT.PlayerState.PLAYING) {
+              setIsPlaying(true)
+              setLoadError(false)
+            }
             else if (s === YT.PlayerState.PAUSED) setIsPlaying(false)
             else if (s === YT.PlayerState.ENDED) {
               autoAdvanceRef.current?.()
             }
           },
           onError: () => {
-            // Auto-skip broken tracks
-            nextRef.current?.()
+            // Flag error, don't auto-skip — let user click YouTube fallback or next
+            setLoadError(true)
+            setIsPlaying(false)
           },
         },
       })
@@ -145,6 +151,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     if (queueList && queueList.length > 0) setQueue(queueList)
     setProgress(0)
     setDuration(track.durationSec)
+    setLoadError(false)
     const p = ytRef.current
     if (ready && p?.loadVideoById && track.youtubeId) {
       p.loadVideoById(track.youtubeId)
@@ -252,7 +259,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   return (
     <Ctx.Provider value={{
       currentTrack, isPlaying, progress, duration: effectiveDuration,
-      volume: volume / 100, liked, shuffle, repeat, queue, ready,
+      volume: volume / 100, liked, shuffle, repeat, queue, ready, loadError,
       play, togglePlay, next, prev, seek,
       setVolume: (v: number) => setVolumeState(Math.round(v * 100)),
       toggleLike, toggleShuffle, cycleRepeat,

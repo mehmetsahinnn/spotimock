@@ -46,23 +46,23 @@ export const tracks: Track[] = [
   { id: 't12', title: 'Greedy', artist: 'Tate McRae', album: 'Think Later', duration: '2:11', durationSec: 131, cover: gradient('#ee9b00', '#ca6702'), youtubeId: 'ItHwgWdgi5Y' },
   { id: 't13', title: 'Stronger', artist: 'Kanye West', album: 'Graduation', duration: '5:11', durationSec: 311, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'PsO6ZnUZI0g' },
   { id: 't14', title: 'Flashing Lights', artist: 'Kanye West', album: 'Graduation', duration: '3:57', durationSec: 237, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'ila-hAUXR5U' },
-  { id: 't15', title: 'Good Life', artist: 'Kanye West', album: 'Graduation', duration: '3:27', durationSec: 207, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: '5SrgwakKQwI' },
-  { id: 't16', title: 'Homecoming', artist: 'Kanye West', album: 'Graduation', duration: '3:23', durationSec: 203, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: '4yIBOdNB04Q' },
-  { id: 't17', title: 'Good Morning', artist: 'Kanye West', album: 'Graduation', duration: '3:15', durationSec: 195, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'oXp2A0ENC4Q' },
-  { id: 't18', title: 'Champion', artist: 'Kanye West', album: 'Graduation', duration: '2:47', durationSec: 167, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: '8MMG-yz1yI0' },
+  { id: 't15', title: 'Good Life', artist: 'Kanye West', album: 'Graduation', duration: '3:27', durationSec: 207, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'TQqK7XHcrpc' },
+  { id: 't16', title: 'Homecoming', artist: 'Kanye West', album: 'Graduation', duration: '3:23', durationSec: 203, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'kvOY3iNbqg4' },
+  { id: 't17', title: 'Good Morning', artist: 'Kanye West', album: 'Graduation', duration: '3:15', durationSec: 195, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'D7ATy-tBxJU' },
+  { id: 't18', title: 'Champion', artist: 'Kanye West', album: 'Graduation', duration: '2:47', durationSec: 167, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'Whz7lQ_5OXM' },
   { id: 't19', title: 'Can\'t Tell Me Nothing', artist: 'Kanye West', album: 'Graduation', duration: '4:32', durationSec: 272, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'E58qLXBfLrs' },
-  // Daft Punk — Random Access Memories (2013)
-  { id: 't20', title: 'Get Lucky', artist: 'Daft Punk, Pharrell Williams, Nile Rodgers', album: 'Random Access Memories', duration: '6:08', durationSec: 368, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: '5NV6Rdv1a3I' },
-  { id: 't21', title: 'Instant Crush', artist: 'Daft Punk, Julian Casablancas', album: 'Random Access Memories', duration: '5:37', durationSec: 337, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'N9Wp7RFhVtM' },
-  { id: 't22', title: 'Lose Yourself to Dance', artist: 'Daft Punk, Pharrell Williams', album: 'Random Access Memories', duration: '5:53', durationSec: 353, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'ibe44asL2cI' },
-  { id: 't23', title: 'Doin\' It Right', artist: 'Daft Punk, Panda Bear', album: 'Random Access Memories', duration: '4:11', durationSec: 251, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'fOHN-eQ44ds' },
+  // Daft Punk — Random Access Memories (2013) — use lyric/audio uploads (official MVs often blocked from embed)
+  { id: 't20', title: 'Get Lucky', artist: 'Daft Punk, Pharrell Williams, Nile Rodgers', album: 'Random Access Memories', duration: '6:08', durationSec: 368, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'h6dEDp_GZuk' },
+  { id: 't21', title: 'Instant Crush', artist: 'Daft Punk, Julian Casablancas', album: 'Random Access Memories', duration: '5:37', durationSec: 337, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'JFKQB0-Rfm0' },
+  { id: 't22', title: 'Lose Yourself to Dance', artist: 'Daft Punk, Pharrell Williams', album: 'Random Access Memories', duration: '5:53', durationSec: 353, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'tjbWHpZmShQ' },
+  { id: 't23', title: 'Doin\' It Right', artist: 'Daft Punk, Panda Bear', album: 'Random Access Memories', duration: '4:11', durationSec: 251, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'bf7TS_-ucBs' },
   { id: 't24', title: 'Giorgio by Moroder', artist: 'Daft Punk, Giorgio Moroder', album: 'Random Access Memories', duration: '9:04', durationSec: 544, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'zhl-Cs1-sG4' },
   // Pentagram (Mezarkabul) — Turkish heavy metal
-  { id: 't25', title: 'Sonsuzluk', artist: 'Pentagram', album: 'Anatolia', duration: '5:42', durationSec: 342, cover: gradient('#000000', '#660000'), youtubeId: 'jVqClS5BvBI' },
-  { id: 't26', title: 'Anatolia', artist: 'Pentagram', album: 'Anatolia', duration: '6:18', durationSec: 378, cover: gradient('#000000', '#660000'), youtubeId: 'GFwgBSmu_TM' },
-  { id: 't27', title: 'On The Wings of the Sad Wind', artist: 'Pentagram', album: 'Anatolia', duration: '4:55', durationSec: 295, cover: gradient('#000000', '#660000'), youtubeId: 'IjsbEqx3LE0' },
-  { id: 't28', title: 'Bir', artist: 'Pentagram', album: 'Bir', duration: '4:33', durationSec: 273, cover: gradient('#1a0000', '#330000'), youtubeId: 'O0lEFsoOl9o' },
-  { id: 't29', title: 'Zihni Sinir', artist: 'Pentagram', album: 'Bir', duration: '3:48', durationSec: 228, cover: gradient('#1a0000', '#330000'), youtubeId: 'h6BR8B0VYHE' },
+  { id: 't25', title: 'Sonsuzluk', artist: 'Pentagram', album: 'Anatolia', duration: '5:42', durationSec: 342, cover: gradient('#000000', '#660000'), youtubeId: 'JFmgyVuV7lE' },
+  { id: 't26', title: 'Anatolia', artist: 'Pentagram', album: 'Anatolia', duration: '6:18', durationSec: 378, cover: gradient('#000000', '#660000'), youtubeId: 'JjbB9HJ3UkY' },
+  { id: 't27', title: 'On The Wings of the Sad Wind', artist: 'Pentagram', album: 'Anatolia', duration: '4:55', durationSec: 295, cover: gradient('#000000', '#660000'), youtubeId: 'bAEEHrV-NdM' },
+  { id: 't28', title: 'Bir', artist: 'Pentagram', album: 'Bir', duration: '4:33', durationSec: 273, cover: gradient('#1a0000', '#330000'), youtubeId: '7-3RDH9DkbU' },
+  { id: 't29', title: 'Zihni Sinir', artist: 'Pentagram', album: 'Bir', duration: '3:48', durationSec: 228, cover: gradient('#1a0000', '#330000'), youtubeId: 'Tw9DI5wzc7Q' },
 ]
 
 export const playlists: Playlist[] = [

@@ -2,6 +2,7 @@
 
 import { usePlayer } from '@/lib/player-context'
 import { Artwork } from './Artwork'
+import { youtubeSearchUrl } from '@/lib/data'
 import {
   PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon,
   ShuffleIcon, RepeatIcon, HeartIcon, VolumeIcon,
@@ -16,7 +17,7 @@ const fmt = (sec: number) => {
 
 export function Player() {
   const {
-    currentTrack, isPlaying, progress, duration, volume, liked, shuffle, repeat,
+    currentTrack, isPlaying, progress, duration, volume, liked, shuffle, repeat, loadError,
     togglePlay, next, prev, seek, setVolume,
     toggleLike, toggleShuffle, cycleRepeat,
   } = usePlayer()
@@ -29,7 +30,31 @@ export function Player() {
   const volLevel = volume === 0 ? 0 : volume < 0.5 ? 1 : 2
 
   return (
-    <div className="h-[90px] bg-black px-2 sm:px-4 flex items-center justify-between shrink-0 gap-2">
+    <div className="bg-black shrink-0">
+      {loadError && (
+        <div className="bg-[#3a1f1f] border-t border-[#ff4d4d]/40 px-4 py-2 text-[12px] text-[#ff9d9d] flex items-center justify-between gap-3">
+          <span>
+            Playback blocked for this video. The uploader may have disabled embedding.
+          </span>
+          <div className="flex items-center gap-3 shrink-0">
+            <a
+              href={youtubeSearchUrl(currentTrack)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white underline hover:text-[#1ed760] transition-colors font-bold"
+            >
+              Find on YouTube
+            </a>
+            <button
+              onClick={next}
+              className="text-white hover:text-[#1ed760] transition-colors font-bold"
+            >
+              Skip →
+            </button>
+          </div>
+        </div>
+      )}
+    <div className="h-[90px] px-2 sm:px-4 flex items-center justify-between gap-2">
       {/* Left — track info */}
       <div className="flex items-center gap-3 w-[40%] sm:w-[30%] min-w-0">
         <Artwork
@@ -125,6 +150,7 @@ export function Player() {
           <MaximizeIcon size={16} />
         </button>
       </div>
+    </div>
     </div>
   )
 }
