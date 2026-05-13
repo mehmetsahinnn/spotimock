@@ -53,7 +53,7 @@ export const tracks: Track[] = [
   { id: 't19', title: 'Can\'t Tell Me Nothing', artist: 'Kanye West', album: 'Graduation', duration: '4:32', durationSec: 272, cover: gradient('#ec5f8e', '#1c8feb'), youtubeId: 'E58qLXBfLrs' },
   // Daft Punk — Random Access Memories (2013) — use lyric/audio uploads (official MVs often blocked from embed)
   { id: 't20', title: 'Get Lucky', artist: 'Daft Punk, Pharrell Williams, Nile Rodgers', album: 'Random Access Memories', duration: '6:08', durationSec: 368, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'h6dEDp_GZuk' },
-  { id: 't21', title: 'Instant Crush', artist: 'Daft Punk, Julian Casablancas', album: 'Random Access Memories', duration: '5:37', durationSec: 337, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'BPbb40rXfx0' },
+  { id: 't21', title: 'Instant Crush', artist: 'Daft Punk, Julian Casablancas', album: 'Random Access Memories', duration: '5:37', durationSec: 337, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'a5uQMwRMHcs' },
   { id: 't22', title: 'Lose Yourself to Dance', artist: 'Daft Punk, Pharrell Williams', album: 'Random Access Memories', duration: '5:53', durationSec: 353, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'tjbWHpZmShQ' },
   { id: 't23', title: 'Doin\' It Right', artist: 'Daft Punk, Panda Bear', album: 'Random Access Memories', duration: '4:11', durationSec: 251, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'bf7TS_-ucBs' },
   { id: 't24', title: 'Giorgio by Moroder', artist: 'Daft Punk, Giorgio Moroder', album: 'Random Access Memories', duration: '9:04', durationSec: 544, cover: gradient('#1a1a1a', '#4a4a4a'), youtubeId: 'zhl-Cs1-sG4' },
@@ -63,6 +63,17 @@ export const tracks: Track[] = [
   { id: 't27', title: 'On The Wings of the Sad Wind', artist: 'Pentagram', album: 'Anatolia', duration: '4:55', durationSec: 295, cover: gradient('#000000', '#660000'), youtubeId: 'bAEEHrV-NdM' },
   { id: 't28', title: 'Bir', artist: 'Pentagram', album: 'Bir', duration: '4:33', durationSec: 273, cover: gradient('#1a0000', '#330000'), youtubeId: '7-3RDH9DkbU' },
   { id: 't29', title: 'Zihni Sinir', artist: 'Pentagram', album: 'Bir', duration: '3:48', durationSec: 228, cover: gradient('#1a0000', '#330000'), youtubeId: 'Tw9DI5wzc7Q' },
+  // Tame Impala — psych rock / radio seeds
+  { id: 't30', title: 'The Less I Know The Better', artist: 'Tame Impala', album: 'Currents', duration: '3:36', durationSec: 216, cover: gradient('#ff9ec7', '#c44569'), youtubeId: '2WrI996a5HE' },
+  { id: 't31', title: 'Let It Happen', artist: 'Tame Impala', album: 'Currents', duration: '7:47', durationSec: 467, cover: gradient('#ff9ec7', '#c44569'), youtubeId: 'BMKEvHca8FA' },
+  { id: 't32', title: 'Borderline', artist: 'Tame Impala', album: 'The Slow Rush', duration: '3:57', durationSec: 237, cover: gradient('#ffb4a2', '#e5989b'), youtubeId: 'mfFGTtRA9wM' },
+  { id: 't33', title: 'Lost In Yesterday', artist: 'Tame Impala', album: 'The Slow Rush', duration: '3:55', durationSec: 235, cover: gradient('#ffb4a2', '#e5989b'), youtubeId: 'EI4PFFagrfg' },
+  { id: 't34', title: 'Feels Like We Only Go Backwards', artist: 'Tame Impala', album: 'Lonerism', duration: '3:13', durationSec: 193, cover: gradient('#b08968', '#7f5539'), youtubeId: 'wycjnCCgUes' },
+  { id: 't35', title: 'New Person, Same Old Mistakes', artist: 'Tame Impala', album: 'Currents', duration: '6:00', durationSec: 360, cover: gradient('#ff9ec7', '#c44569'), youtubeId: 'XXr10Sw7QH4' },
+  // Tame Impala adjacent — radio recommendations (psych pop / indie)
+  { id: 't36', title: 'Electric Feel', artist: 'MGMT', album: 'Oracular Spectacular', duration: '3:49', durationSec: 229, cover: gradient('#7209b7', '#3a0ca3'), youtubeId: 'MmZexg8sxyk' },
+  { id: 't37', title: 'Dreams', artist: 'Fleetwood Mac', album: 'Rumours', duration: '4:14', durationSec: 254, cover: gradient('#bc6c25', '#dda15e'), youtubeId: 'mrZRURcb1cM' },
+  { id: 't38', title: 'Time to Pretend', artist: 'MGMT', album: 'Oracular Spectacular', duration: '4:21', durationSec: 261, cover: gradient('#7209b7', '#3a0ca3'), youtubeId: 'mp7VV0NeXYY' },
 ]
 
 export const playlists: Playlist[] = [
@@ -78,6 +89,7 @@ export const playlists: Playlist[] = [
   { id: 'p10', name: 'Random Access Memories', description: 'Daft Punk · 2013 · The robots return with disco, funk, and Pharrell', cover: gradient('#1a1a1a', '#4a4a4a'), owner: 'Daft Punk', trackCount: 5, trackIds: ['t20', 't21', 't22', 't23', 't24'] },
   { id: 'p11', name: 'Anatolia', description: 'Pentagram · 1997 · Turkish metal\'s Eastern soul', cover: gradient('#000000', '#660000'), owner: 'Pentagram', trackCount: 3, trackIds: ['t25', 't26', 't27'] },
   { id: 'p12', name: 'Bir', description: 'Pentagram · 2002 · Mezarkabul era classic', cover: gradient('#1a0000', '#330000'), owner: 'Pentagram', trackCount: 2, trackIds: ['t28', 't29'] },
+  { id: 'p13', name: 'Tame Impala Radio', description: 'Endless psych-pop drift · seeded from The Less I Know The Better', cover: gradient('#ff9ec7', '#c44569'), owner: 'Spotify', trackCount: 9, trackIds: ['t30', 't31', 't35', 't37', 't32', 't36', 't33', 't38', 't34'] },
 ]
 
 export const recentlyPlayed: Album[] = [
@@ -91,6 +103,7 @@ export const recentlyPlayed: Album[] = [
   { id: 'a8', title: 'Random Access Memories', artist: 'Daft Punk', cover: gradient('#1a1a1a', '#4a4a4a'), year: 2013, playlistId: 'p10' },
   { id: 'a9', title: 'Anatolia', artist: 'Pentagram', cover: gradient('#000000', '#660000'), year: 1997, playlistId: 'p11' },
   { id: 'a10', title: 'Bir', artist: 'Pentagram', cover: gradient('#1a0000', '#330000'), year: 2002, playlistId: 'p12' },
+  { id: 'a11', title: 'Tame Impala Radio', artist: 'Spotify', cover: gradient('#ff9ec7', '#c44569'), year: 2024, playlistId: 'p13' },
 ]
 
 export const getTrackById = (id: string): Track | undefined =>
